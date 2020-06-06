@@ -1,11 +1,15 @@
-import express from 'express';
-import { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDoc } from './docs/swagger';
 import { logger, props } from './common/utils';
-import routes from './routes';
+import use from './routes';
 
 const app: Application = express();
 
-app.get('/', (req: Request, res: Response) => res.send('minesweeper-api'));
-app.use('/match', routes.match);
+app.use(express.json());
+app.use('/auth', use.authRoutes);
+app.use('/match', use.matchRoutes);
+app.use('/player', use.playerRoutes);
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc()));
 
 app.listen(props.port, () => logger.info(`minesweeper-api::running at http://localhost:${props.port}`));
