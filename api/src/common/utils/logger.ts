@@ -9,3 +9,5 @@ export const logger = winston.createLogger({
 		new winston.transports.File({ filename: 'combined.log' }),
 	],
 });
+
+export const errorMsg = (msg: string) => `[api][${new Date().toISOString()}][${msg}]`;
