@@ -1,5 +1,9 @@
-import match from './match';
+import matchRoutes from './matchRoutes';
+import authRoutes from './authRoutes';
+import playerRoutes from './playerRoutes';
 
 export default {
-	match,
+	authRoutes,
+	playerRoutes,
+	matchRoutes,
 };
