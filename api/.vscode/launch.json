@@ -4,6 +4,16 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "minesweeper::debug::tests",
+			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"args": ["-r", "ts-node/register", "tests/**/*.test.ts", "--timeout", "10000", "--colors"],
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"protocol": "inspector"
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "minesweep::debug::api",
 			"runtimeVersion": "12.17.0",
 			"program": "${workspaceFolder}/src/index.ts",

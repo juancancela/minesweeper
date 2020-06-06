@@ -1,20 +1,24 @@
 import BluebirdPromise from 'bluebird';
 import { connectionString, databaseName } from './props';
 const mongoDb = BluebirdPromise.promisifyAll(require('mongodb'));
-const client = mongoDb.MongoClient;
+let client = mongoDb.MongoClient;
 
-export const run = async (collectionName: string, params: Object = {}, isList: boolean = false) => {
-	const connection = await client.connect(connectionString);
-	const db = connection.db(databaseName);
-	const col = db.collection(collectionName);
+export const run = async (collectionName: string, query: Object = {}, isList: boolean = false) => {
+	let connection;
 	try {
-		const res = await col.find(params).toArray();
+		connection = await client.connect(connectionString);
+		const db = connection.db(databaseName);
+		const col = db.collection(collectionName);
+		const res = await col.find(query).toArray();
 		if (isList) return res;
 		return res[0];
-	} catch (error) {
-		console.log('error', error);
-		//TODO Review once error handling is implemented
+	} catch (err) {
+		throw new Error(`Connection to MongoDB failed. Error: ${err}`);
 	} finally {
-		await connection.close();
+		if (connection) await connection.close();
 	}
+};
+
+export const setClient = (cli: any) => {
+	client = cli;
 };

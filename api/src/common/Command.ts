@@ -1,3 +1,3 @@
-export interface Command {
-	execute(): void;
+export interface Command<T> {
+	execute(): T;
 }
