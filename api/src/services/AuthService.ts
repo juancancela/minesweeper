@@ -1,5 +1,5 @@
 export class AuthService {
-	testMethod() {
-		return 1;
+	async login(user: string, password: string): Promise<boolean> {
+		return true;
 	}
 }
