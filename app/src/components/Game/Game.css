@@ -24,21 +24,26 @@
 .Game-content {
   display: grid;
   grid-template-columns: 30% 1fr;
-  font-size: 30px;
   margin: 30px;
 }
 
 .Game-content-board {
-  padding: 40px;
+  font-size: 50px;
   background-color: grey;
   text-align: center;
 }
 
 .Game-content-board-item {
+  display: inline-block;
+  width: 50px;
+  padding-right: 10px;
   cursor: pointer;
 }
 
 .Game-content-board-item-selected {
   cursor: pointer;
-  color: green;
+  display: inline-block;
+  padding-right: 10px;
+  width: 50px;
+  color: chartreuse;
 }
