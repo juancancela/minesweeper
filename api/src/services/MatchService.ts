@@ -7,9 +7,11 @@ import { LruCache } from '../common/Cache';
 export class MatchService {
 	private cache = new LruCache<Match>();
 
-	async createMath(playerId: string): Promise<Match> {
-		const board = new Board();
-		return new Match(playerId, board);
+	async createMath(playerId: string, rows?: number, cols?: number, bombs?: number): Promise<Match> {
+		const board = new Board(rows, cols, bombs);
+		const match = new Match(playerId, board);
+		match.setId('12345');
+		return match;
 	}
 
 	async deleteMatch(matchId: string): Promise<void> {

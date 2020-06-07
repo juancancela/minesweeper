@@ -5,6 +5,7 @@ import { errorMsg } from '../common/utils/logger';
 import { UpdateCellCommand } from '../services/MatchServiceCommands';
 import { CellStateType } from '../models/CellStateType';
 import { NullCommand } from '../common/NullCommand';
+import { ServiceResponse } from '../common/ServiceResponse';
 
 const { matchService, playerService } = services;
 
@@ -30,7 +31,8 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.get('/:playerId/match', async (req: Request, res: Response) => {
 	try {
 		const playerId = String(req.query?.playerId);
-		return res.send(matchService.getMatchesByPlayerId(playerId));
+		const response = new ServiceResponse(matchService.getMatchesByPlayerId(playerId));
+		return res.send(response);
 	} catch (err) {
 		return res.send(errorMsg(err.msg));
 	}
@@ -38,8 +40,11 @@ router.get('/:playerId/match', async (req: Request, res: Response) => {
 
 router.post('/:playerId/match', async (req: Request, res: Response) => {
 	try {
-		const playerId = String(req.query?.playerId);
-		return res.send(matchService.createMath(playerId));
+		const playerId = String(req.params?.playerId);
+		const { rows, cols, bombs } = req.body;
+		const match = await matchService.createMath(playerId, rows, cols, bombs);
+		const response = new ServiceResponse(match);
+		return res.send(response);
 	} catch (err) {
 		return res.send(errorMsg(err.msg));
 	}

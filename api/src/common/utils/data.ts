@@ -26,27 +26,27 @@ export function arePositiveInt(vals: number[]) {
 
 /**
  * Creates a matrix of size x*y with total number of randon positions set to true
- * @param x the x axis size of the matrix
- * @param y the y axis size of the matrix
+ * @param cols the number of columns of the matrix
+ * @param rows the number of rows of the matrix
  * @param total the total number of positions of the matrix set to true
  */
-export function randomMatrix(x: number, y: number, total: number): boolean[][] {
-	if (!arePositiveInt([x, y, total])) return [];
+export function randomMatrix(cols: number, rows: number, total: number): boolean[][] {
+	if (!arePositiveInt([cols, rows, total])) return [];
 	const random = (val: number): number => Math.floor(Math.random() * val);
 	let totalPlaced: number = 0;
 	let map: boolean[][] = [];
-	for (let i = 0; i < y; i++) {
-		for (let j = 0; j < x; j++) {
+	for (let i = 0; i < rows; i++) {
+		for (let j = 0; j < cols; j++) {
 			if (!map[i]) map[i] = [];
 			map[i][j] = false;
 		}
 	}
 
 	do {
-		const rx = random(x);
-		const ry = random(y);
-		if (!map[rx][ry]) {
-			map[rx][ry] = true;
+		const rRow = random(rows);
+		const rCol = random(cols);
+		if (!map[rRow][rCol]) {
+			map[rRow][rCol] = true;
 			++totalPlaced;
 		}
 	} while (totalPlaced !== total);

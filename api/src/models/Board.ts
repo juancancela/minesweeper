@@ -20,7 +20,7 @@ export class Board {
 		this.rows = rows;
 		this.cols = cols;
 		this.bombs = bombs;
-		this.cells = this.initCells(cols, rows, bombs);
+		this.cells = this.initCells(Number(cols), Number(rows), Number(bombs));
 	}
 
 	private initCells(cols: number, rows: number, bombs: number): Cell[][] {
