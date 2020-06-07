@@ -1,0 +1,53 @@
+.Home {
+  text-align: center;
+}
+
+.Home-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.Home-play-now-btn {
+  border: 10px solid white;
+  border-radius: 45px;
+  background: rebeccapurple;
+  width: 200px;
+  padding: 20px;
+  margin-bottom: 30px;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+}
+
+.Home-play-now-btn:hover {
+  font-weight: bolder;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .Home-logo {
+    animation: Home-logo-spin infinite 5s linear;
+  }
+}
+
+.Home-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Home-link {
+  color: green;
+}
+
+@keyframes Home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

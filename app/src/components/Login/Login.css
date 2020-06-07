@@ -1,0 +1,43 @@
+.Login-container {
+  color: white;
+  width: 400px;
+  padding: 20px;
+}
+
+.Login-play-now-btn {
+  border: 10px solid white;
+  border-radius: 45px;
+  color: white;
+  background: rebeccapurple;
+  width: 300px;
+  padding: 20px;
+  margin-top: 30px;
+  font-size: calc(10px + 2vmin);
+  cursor: pointer;
+}
+
+.Login-play-now-btn:hover {
+  font-weight: bolder;
+}
+
+.Login-error-msg {
+  border: 10px solid white;
+  color: white;
+  text-align: center;
+  background-color: red;
+  font-weight: bolder;
+  border-radius: 45px;
+  padding: 5px;
+  margin: 20px;
+  width: 600px;
+}
+
+.Login-item {
+  display: grid;
+  padding-bottom: 15px;
+  grid-template-columns: 150px 250px;
+}
+
+.Login-item-label {
+  min-width: 200px;
+}
