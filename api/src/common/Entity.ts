@@ -1,3 +1,6 @@
+/**
+ * Base class for all models that are persisted.
+ */
 export abstract class Entity {
 	private id: string = '';
 

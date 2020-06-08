@@ -1,5 +1,8 @@
 import winston from 'winston';
 
+/**
+ * Creates a logger object
+ */
 export const logger = winston.createLogger({
 	level: 'info',
 	format: winston.format.json(),
@@ -10,6 +13,10 @@ export const logger = winston.createLogger({
 	],
 });
 
+/**
+ * Wrapper to be used when creating error messages to have a standard format.
+ * @param msg error message
+ */
 export const errorMsg = (msg: string) => {
 	return {
 		system: 'api',

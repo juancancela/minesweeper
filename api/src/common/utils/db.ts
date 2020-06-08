@@ -3,6 +3,12 @@ import { connectionString, databaseName } from './props';
 const mongoDb = BluebirdPromise.promisifyAll(require('mongodb'));
 let client = mongoDb.MongoClient;
 
+/**
+ * Executes a read query to the database
+ * @param collectionName the name of the collection ot be queries
+ * @param query the query to be executed on the collection
+ * @param isList whether or not the result should be treated as a list of not
+ */
 export const read = async (collectionName: string, query: Object = {}, isList: boolean = false) => {
 	let connection;
 	try {
@@ -19,6 +25,11 @@ export const read = async (collectionName: string, query: Object = {}, isList: b
 	}
 };
 
+/**
+ * Executes a create query on the database
+ * @param collectionName the name of the collection to where the new document will be inserted
+ * @param obj the new document to be inserted
+ */
 export const create = async (collectionName: string, obj: Object = {}) => {
 	let connection;
 	try {
@@ -34,6 +45,12 @@ export const create = async (collectionName: string, obj: Object = {}) => {
 	}
 };
 
+/**
+ * Updates -or upserts, given the case- a given document of the database.
+ * @param collectionName the name of the collection
+ * @param obj the new document that will updated the existing one
+ * @param id the id of the document to be updated on the giving collection
+ */
 export const update = async (collectionName: string, obj: Object = {}, id: string) => {
 	let connection;
 	try {
@@ -49,6 +66,10 @@ export const update = async (collectionName: string, obj: Object = {}, id: strin
 	}
 };
 
+/**
+ * Sets the driver of the databse
+ * @param cli databse driver client
+ */
 export const setClient = (cli: any) => {
 	client = cli;
 };

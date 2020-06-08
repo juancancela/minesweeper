@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import "./Game.css";
 import { getPosKeyCodes, fill2DArray } from "../../utils";
-import { resetStorage } from "../../store";
 import api from "../../api";
+import { resetStorage } from "../../store";
 import { AppContext } from "../AppContext/AppContext";
 
 export function fromServerCells(serverCells, rows, cols) {
@@ -30,11 +30,9 @@ export default function Game() {
   const [proceedToGameSetup, setProceedToGameSetup] = useState(false);
   const [selectedCell, setSelectedCell] = useState({ x: 0, y: 0 });
   const [cells, setCells] = useState(
-    fill2DArray(CellState.COVERED, state.rows, state.cols)
+    fill2DArray(COVERED, state.rows, state.cols)
   );
-  const [player, setPlayer] = useState(null);
   const { rows, cols } = state;
-
   const { UNCOVERED, COVERED, FLAGGED_RED, FLAGGED_QUESTION } = CellState;
 
   useEffect(() => {
@@ -51,9 +49,7 @@ export default function Game() {
     setProceedToHome(true);
   };
 
-  const handleRestart = () => {
-    setProceedToGameSetup(true);
-  };
+  const handleRestart = () => setProceedToGameSetup(true);
 
   const handlePosition = async (e) => {
     const { keyCode } = e;
