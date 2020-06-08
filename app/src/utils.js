@@ -15,4 +15,4 @@ export function fill2DArray(val, x, y) {
 }
 
 export const errorMsg = (msg) =>
-  `It Looks something is not ok on our end. Please try again later. Details: ${msg}`;
+  `It looks something is not OK on the API. Please try again later. Details: ${msg}`;

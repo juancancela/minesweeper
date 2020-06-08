@@ -18,7 +18,7 @@ const {
 
 /**
  * Authentication Service.
- * For the sake of simplicity, it just mocks two users provided through environment
+ * For the sake of simplicity, it just mocks two users provided through system environment vars
  */
 export class AuthService {
 	async login(email: string, password: string): Promise<LoginResponseType> {

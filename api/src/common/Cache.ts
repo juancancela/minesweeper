@@ -1,3 +1,6 @@
+/**
+ * In Memory LRU Cache
+ */
 export class LruCache<T> {
 	private values: Map<string, T | undefined> = new Map<string, T>();
 	private maxEntries: number = 2000;

@@ -9,14 +9,6 @@ import { responseError, responseOk } from '../common/utils/service';
 const { matchService, playerService } = services;
 const router = express.Router();
 
-router.get('/', async (req: Request, res: Response) => {
-	try {
-		return res.send(responseOk(playerService.getPlayers()));
-	} catch (err) {
-		return res.send(responseError(err.message));
-	}
-});
-
 router.get('/:id', async (req: Request, res: Response) => {
 	try {
 		const id = String(req.params?.id);

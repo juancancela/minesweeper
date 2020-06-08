@@ -3,13 +3,11 @@ import { Entity } from '../common/Entity';
 export class Player extends Entity {
 	private name: string;
 	private email: string;
-	private password: string;
 
-	constructor(name: string, email: string, password: string) {
+	constructor(name: string, email: string) {
 		super();
 		this.name = name;
 		this.email = email;
-		this.password = password;
 	}
 
 	getName(): string {
@@ -18,9 +16,5 @@ export class Player extends Entity {
 
 	getEmail(): string {
 		return this.email;
-	}
-
-	getPassword(): string {
-		return this.password;
 	}
 }

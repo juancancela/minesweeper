@@ -4,6 +4,9 @@ import services from './index';
 import { MatchService } from './MatchService';
 import { CellStateType } from '../models/CellStateType';
 
+/**
+ * Commands of the Match Service
+ */
 export class UpdateCellCommand implements Command<Promise<Match>> {
 	private matchId: string;
 	private type: CellStateType;

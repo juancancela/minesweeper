@@ -19,8 +19,7 @@ export function getPlayerId() {
 }
 
 export function resetStorage() {
-  ls.removeItem(USER_TOKEN_KEY);
-  ls.removeItem(PLAYER_ID);
+  ls.clear();
 }
 
 export function setMatch(id, match) {

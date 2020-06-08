@@ -20,7 +20,7 @@ const run = async (
     const res = await axios[method](`${URL}/${path}`, data, headers);
     return res.data;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
   }
 };
 
