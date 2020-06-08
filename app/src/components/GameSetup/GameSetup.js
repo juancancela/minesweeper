@@ -1,29 +1,42 @@
-import React, { useState, useContext } from "react";
-import axios from "axios";
-import "./GameSetup.css";
-import { getApiUrl, getPlayerId, getUserToken } from "../../utils";
-import { AppContext } from "../AppContext/AppContext";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import "./GameSetup.css";
+import api from "../../api";
+import { errorMsg } from "../../utils";
+import { AppContext } from "../AppContext/AppContext";
 
 export default function GameSetup() {
   const [error, setError] = useState(null);
+  const [matches, setMatches] = useState([]);
   const [state, setState] = useContext(AppContext);
   const { rows, cols, bombs, matchId } = state;
 
+  const ITEMS = [
+    {
+      name: "rows",
+      defaultValue: rows,
+    },
+    {
+      name: "cols",
+      defaultValue: cols,
+    },
+    {
+      name: "bombs",
+      defaultValue: cols,
+    },
+  ];
+
+  useEffect(() => {
+    api.getMatchesOfPlayer().then((result) => {
+      console.log("tipo naa");
+      console.log(JSON.stringify(result.response));
+      setMatches(result.response);
+    });
+  }, []);
+
   const handleCreateMatch = async (rows, cols, bombs) => {
     try {
-      const data = {
-        rows,
-        cols,
-        bombs,
-      };
-      const headers = { "user-token": getUserToken() };
-      const result = await axios.post(
-        `${getApiUrl()}player/${getPlayerId()}/match`,
-        data,
-        headers
-      );
-      const { response, success } = result.data;
+      const { response, success } = await api.createMatch(rows, cols, bombs);
       if (success) {
         const matchId = response.id;
         setState((state) => ({
@@ -35,17 +48,13 @@ export default function GameSetup() {
         }));
       } else {
         setError(
-          "Invalid User and Password. (Hint: Have you tried with juan@dev.com / 123 ? ;)"
+          "Invalid combination of board parameters. Please try with positive integers."
         );
       }
     } catch (err) {
-      setError(
-        `It Looks something is not ok on our end. Please try again later. Details: ${err}`
-      );
+      setError(errorMsg(err));
     }
   };
-
-  console.log(JSON.stringify(state));
 
   if (matchId) {
     return <Redirect to={`/game/${matchId}`} />;
@@ -53,57 +62,42 @@ export default function GameSetup() {
   return (
     <>
       <div className="GameSetup-container">
-        <div className="Login-item">
-          <label className="Login-item-label">Number Of Rows</label>
-          <input
-            name="rows"
-            type="number"
-            defaultValue={rows}
-            onChange={(e) => {
-              const rows = parseInt(e.target.value);
-              setState((state) => ({
-                ...state,
-                rows,
-              }));
-            }}
-          />
-        </div>
-        <div className="Login-item">
-          <label className="Login-item-label">Number Of Columns</label>
-          <input
-            name="cols"
-            type="number"
-            defaultValue={cols}
-            onChange={(e) => {
-              const cols = parseInt(e.target.value);
-              setState((state) => ({
-                ...state,
-                cols,
-              }));
-            }}
-          />
-        </div>
-        <div className="Login-item">
-          <label className="Login-item-label">Number Of Bombs</label>
-          <input
-            name="bombs"
-            type="number"
-            defaultValue={bombs}
-            onChange={(e) => {
-              const bombs = parseInt(e.target.value);
-              setState((state) => ({
-                ...state,
-                bombs,
-              }));
-            }}
-          />
-        </div>
+        {ITEMS.map((item, idx) => {
+          return (
+            <div key={`gamesetup-i-${idx}`} className="Login-item">
+              <label className="Login-item-label">Number {item.name}</label>
+              <input
+                name={item.name}
+                type="number"
+                defaultValue={item.defaultValue}
+                onChange={(e) => {
+                  const value = parseInt(e.target.value);
+                  setState((state) => ({
+                    ...state,
+                    [item.name]: value,
+                  }));
+                }}
+              />
+            </div>
+          );
+        })}
         <button
           className="Login-play-now-btn"
           onClick={async () => handleCreateMatch(rows, cols, bombs)}
         >
           Play!
         </button>
+        <div className="GameSetup-match-list">
+          <>
+            <div className="GameSetup-match-list-title">Saved matches:</div>
+            {matches.slice(0, 10).map((m) => (
+              <a className="GameSetup-match-list-item" href={`/game/${m.id}`}>
+                Match with Id {m.id}
+              </a>
+            ))}
+            {matches.length === 0 && <div>No matches saved yet for user</div>}
+          </>
+        </div>
       </div>
       {error && <div className="Login-error-msg">{error}</div>}
     </>

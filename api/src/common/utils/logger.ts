@@ -10,4 +10,10 @@ export const logger = winston.createLogger({
 	],
 });
 
-export const errorMsg = (msg: string) => `[api][${new Date().toISOString()}][${msg}]`;
+export const errorMsg = (msg: string) => {
+	return {
+		system: 'api',
+		date: new Date().toISOString(),
+		message: msg,
+	};
+};

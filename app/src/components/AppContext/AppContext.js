@@ -7,11 +7,13 @@ const DEFAULT_NUMBER_OF_BOMBS = 10;
 
 const AppProvider = (props) => {
   const [state, setState] = useState({
-    rows: 10,
-    cols: 10,
-    bombs: 10,
-    matchId: 0,
-    time: 0,
+    rows: localStorage.getItem("rows") || DEFAULT_NUMBER_OF_ROWS,
+    cols: localStorage.getItem("cols") || DEFAULT_NUMBER_OF_COLS,
+    bombs: localStorage.getItem("bombs") || DEFAULT_NUMBER_OF_BOMBS,
+    matchId: localStorage.getItem("matchId"),
+    matchStatus: localStorage.getItem("matchStatus"),
+    player: localStorage.getItem("playerId"),
+    time: localStorage.getItem("time") || 0,
   });
   return (
     <AppContext.Provider value={[state, setState]}>
