@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { redirectTo, setUserToken, setPlayerId, getApiUrl } from "../../utils";
-import axios from "axios";
+import { errorMsg } from "../../utils";
+import { setUserToken, setPlayerId } from "../../store";
+import api from "../../api";
 import "./Login.css";
 import { Redirect } from "react-router-dom";
 
@@ -15,12 +16,8 @@ export default function Login() {
   }
   const handleLogin = async () => {
     try {
-      const result = await axios.post(`${getApiUrl()}auth/login`, {
-        email,
-        password,
-      });
-      const { response, success } = result.data;
-      if (success) {
+      const { response } = await api.login(email, password);
+      if (response.success) {
         const { token, playerId } = response;
         setUserToken(token);
         setPlayerId(playerId);
@@ -31,9 +28,7 @@ export default function Login() {
         );
       }
     } catch (err) {
-      setError(
-        `It Looks something is not ok on our end. Please try again later. Details: ${err}`
-      );
+      setError(errorMsg(err));
     }
   };
 

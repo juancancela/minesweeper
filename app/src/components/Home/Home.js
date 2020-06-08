@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Home.css";
 import logo from "./logo.png";
-import { getUserToken } from "../../utils";
+import { getUserToken } from "../../store";
 import { Link } from "react-router-dom";
 
 const ITEMS = [

@@ -1,6 +1,6 @@
 export class LruCache<T> {
 	private values: Map<string, T | undefined> = new Map<string, T>();
-	private maxEntries: number = 20;
+	private maxEntries: number = 2000;
 
 	public get(key: string): T | undefined {
 		const hasKey = this.values.has(key);

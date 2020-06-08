@@ -14,17 +14,18 @@ export class UpdateCellCommand implements Command<Promise<Match>> {
 	constructor(matchId: string, type: CellStateType, x: number, y: number) {
 		this.matchId = matchId;
 		this.service = services.matchService;
-		this.x = x;
-		this.y = y;
+		this.x = Number(x);
+		this.y = Number(y);
 		this.type = type;
 	}
 
 	async execute(): Promise<Match> {
 		try {
 			const match = await this.service.getMatchById(this.matchId);
-			const board = match.getBoard();
-			const cells = board.getCells();
-			cells[this.x][this.y].setState(this.type);
+			const board = match.board;
+			const cells = board.cells;
+			cells[this.x][this.y].state = this.type;
+			MatchService.Cache.put(this.matchId, match);
 			return match;
 		} catch (err) {
 			throw new Error(`Execution of UncoverCellComand failed. Details: ${err}`);

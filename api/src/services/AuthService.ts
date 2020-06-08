@@ -6,16 +6,30 @@ type LoginResponseType = {
 	playerId?: string;
 };
 
-const { testUserEmail, testUserPassword, testUserToken, testPlayerId } = props;
+const {
+	testUserEmail,
+	testUserPassword,
+	testUserToken,
+	testPlayerId,
+	testPlayerId1,
+	testUserEmail1,
+	testUserPassword1,
+} = props;
 
+/**
+ * Authentication Service.
+ * For the sake of simplicity, it just mocks two users provided through environment
+ */
 export class AuthService {
 	async login(email: string, password: string): Promise<LoginResponseType> {
-		const isValid = email === testUserEmail && password === testUserPassword;
+		const isValid =
+			(email === testUserEmail && password === testUserPassword) ||
+			(email === testUserEmail1 && password === testUserPassword1);
 		if (isValid) {
 			return {
 				success: true,
 				token: testUserToken,
-				playerId: testPlayerId,
+				playerId: email === testUserEmail ? testPlayerId : testPlayerId1,
 			};
 		} else {
 			return {

@@ -1,16 +1,19 @@
 import { Match } from '../models/Match';
-//import { run } from '../common/utils/db';
+import { create, read, update } from '../common/utils/db';
 import { Command } from '../common/Command';
 import { Board } from '../models/Board';
 import { LruCache } from '../common/Cache';
 
 export class MatchService {
-	private cache = new LruCache<Match>();
+	public static Cache = new LruCache<Match>();
 
 	async createMath(playerId: string, rows?: number, cols?: number, bombs?: number): Promise<Match> {
 		const board = new Board(rows, cols, bombs);
 		const match = new Match(playerId, board);
-		match.setId('12345');
+		const id = `${playerId}-${new Date().getTime().toString()}`;
+		match.setId(id);
+		await create('matches', match);
+		MatchService.Cache.put(id, match);
 		return match;
 	}
 
@@ -23,17 +26,19 @@ export class MatchService {
 		return [new Match('2', board)];
 	}
 
-	async getMatchById(id: string): Promise<Match> {
-		let cachedMatch = this.cache.get(id);
+	async getMatchById(id: string): Promise<Match | any> {
+		let cachedMatch = MatchService.Cache.get(id);
 		if (cachedMatch) return cachedMatch;
-		//const match = (await run('matches')) as Match;
-		const match = new Match('1', new Board());
-		return match;
+		return await read('matches', { id });
 	}
 
-	async getMatchesByPlayerId(id: string): Promise<Match[]> {
-		const board = new Board();
-		return [new Match('2', board)];
+	async getMatchesByPlayerId(playerId: string): Promise<Match[] | any[]> {
+		const matches = await read('matches', { playerId }, true);
+		return matches;
+	}
+
+	async saveMatch(matchId: string): Promise<void> {
+		await update('matches', MatchService.Cache.get(matchId), matchId);
 	}
 
 	async executeCommand<Match>(command: Command<Match>): Promise<Match> {

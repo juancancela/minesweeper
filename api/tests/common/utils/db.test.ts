@@ -1,4 +1,4 @@
-import { run, setClient } from '../../../src/common/utils/db';
+import { read, setClient } from '../../../src/common/utils/db';
 import { expect } from 'chai';
 
 const mockedFindCreator = (mockedResult: any = []) => {
@@ -31,7 +31,7 @@ const mockedMongoDBClient = (find: Function = mockedFindCreator) => {
 };
 
 describe('commons::utils::db', async () => {
-	describe('run()', async () => {
+	describe('read()', async () => {
 		const find = mockedFindCreator([
 			{
 				testKey: 'testValue',
@@ -39,20 +39,20 @@ describe('commons::utils::db', async () => {
 		]);
 		it('should return the result of a query as a list if isList is true', async () => {
 			setClient(mockedMongoDBClient(find));
-			const res = await run('testCollectionName', {}, true);
+			const res = await read('testCollectionName', {}, true);
 			expect(res.length).to.equal(1);
 			expect(res[0].testKey).to.equal('testValue');
 		});
 		it('should return the result of a query as an object if isList is false', async () => {
 			setClient(mockedMongoDBClient(find));
-			const res = await run('testCollectionName', {}, false);
+			const res = await read('testCollectionName', {}, false);
 			expect(res.length).to.be.undefined;
 			expect(res.testKey).to.equal('testValue');
 		});
 		it('should throw an explicit error if the client is not correctly set', async () => {
 			setClient(null);
 			try {
-				await run('testCollectionName', {}, false);
+				await read('testCollectionName', {}, false);
 			} catch (e) {
 				expect(e.toString()).to.contains('Error: Connection to MongoDB failed.');
 			}

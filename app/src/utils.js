@@ -1,7 +1,3 @@
-const USER_TOKEN_KEY = "user-token";
-const PLAYER_ID = "player-id";
-const ls = localStorage;
-
 export function getPosKeyCodes() {
   return {
     LEFT: 37,
@@ -14,39 +10,9 @@ export function getPosKeyCodes() {
   };
 }
 
-export function getApiUrl() {
-  return "http://localhost:3004/";
+export function fill2DArray(val, x, y) {
+  return new Array(x).fill(val).map(() => new Array(y).fill(val));
 }
 
-export function redirectTo(currentPath, targetPath) {
-  window.location.href = window.location.href.replace(currentPath, targetPath);
-}
-
-export function setUserToken(token) {
-  ls.setItem(USER_TOKEN_KEY, token);
-}
-
-export function getUserToken() {
-  return ls.getItem(USER_TOKEN_KEY);
-}
-
-export function setPlayerId(userId) {
-  ls.setItem(PLAYER_ID, userId);
-}
-
-export function getPlayerId() {
-  return ls.getItem(PLAYER_ID);
-}
-
-export function resetStorage() {
-  ls.removeItem(USER_TOKEN_KEY);
-  ls.removeItem(PLAYER_ID);
-}
-
-export function setMatch(id, match) {
-  ls.setItem(`match-${id}`, JSON.stringify(match));
-}
-
-export function getMatch(id) {
-  return JSON.parse(ls.getItem(`match-${id}`));
-}
+export const errorMsg = (msg) =>
+  `It Looks something is not ok on our end. Please try again later. Details: ${msg}`;
