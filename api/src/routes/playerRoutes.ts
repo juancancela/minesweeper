@@ -70,13 +70,13 @@ router.post('/:playerId/match/:matchId/command', async (req: Request, res: Respo
 
 		switch (commandName) {
 			case UNCOVERED:
-				command = new UpdateCellCommand(matchId, UNCOVERED, x, y);
+				command = new UpdateCellCommand(matchId, commandName, x, y);
 				break;
 			case FLAGGED_RED:
-				command = new UpdateCellCommand(matchId, FLAGGED_RED, x, y);
+				command = new UpdateCellCommand(matchId, commandName, x, y);
 				break;
 			case FLAGGED_QUESTION:
-				command = new UpdateCellCommand(matchId, FLAGGED_QUESTION, x, y);
+				command = new UpdateCellCommand(matchId, commandName, x, y);
 				break;
 			default:
 				throw new Error(`Command ${commandName} is not valid.`);

@@ -1,5 +1,13 @@
-import { randomMatrix, isPositiveInt, arePositiveInt } from '../../../src/common/utils/data';
+import {
+	randomMatrix,
+	isPositiveInt,
+	arePositiveInt,
+	calculateAdjCoeficient,
+	floodFill,
+} from '../../../src/common/utils/data';
 import { expect } from 'chai';
+import { Cell } from '../../../src/models/Cell';
+import { CellStateType } from '../../../src/models/CellStateType';
 
 describe('commons::utils::data', () => {
 	describe('randomMatrix(x: number, y: number, total: number)', () => {
@@ -44,6 +52,43 @@ describe('commons::utils::data', () => {
 		});
 		it('should return true if the given number is a positive integer', () => {
 			expect(isPositiveInt(1)).to.equal(true);
+		});
+	});
+	describe('calculateAdjCoeficient(x: number, y: number, map: boolean[][], maxX: number, maxY: number)', () => {
+		it('should return false if the given number is not a positive integer', () => {
+			const matrix = [
+				[true, false, true, false, true, false],
+				[true, false, true, false, true, false],
+				[true, true, true, true, true, false],
+				[true, false, true, false, true, false],
+				[true, false, true, false, true, false],
+				[true, false, true, false, true, false],
+			];
+			const adj1 = calculateAdjCoeficient(2, 2, matrix, 6, 6);
+			const adj2 = calculateAdjCoeficient(0, 0, matrix, 6, 6);
+			const adj3 = calculateAdjCoeficient(5, 5, matrix, 6, 6);
+			const adj4 = calculateAdjCoeficient(4, 4, matrix, 6, 6);
+
+			expect(adj1).to.equal(4);
+			expect(adj2).to.equal(1);
+			expect(adj3).to.equal(2);
+			expect(adj4).to.equal(2);
+		});
+	});
+	describe('floodFill(x: number, y: number, matrix: boolean[][])', () => {
+		it('should uncover all contiguous positions to the started point (flood fill pattern)', () => {
+			let cells: Cell[][] = new Array(6)
+				.fill(new Cell(CellStateType.COVERED))
+				.map(() => new Array(6).fill(new Cell(CellStateType.COVERED)));
+
+			floodFill(2, 2, cells);
+
+			expect(cells[2][0].getState()).to.equal(CellStateType.UNCOVERED);
+			expect(cells[2][1].getState()).to.equal(CellStateType.UNCOVERED);
+			expect(cells[2][2].getState()).to.equal(CellStateType.UNCOVERED);
+			expect(cells[2][3].getState()).to.equal(CellStateType.UNCOVERED);
+			expect(cells[2][4].getState()).to.equal(CellStateType.UNCOVERED);
+			expect(cells[2][5].getState()).to.equal(CellStateType.UNCOVERED);
 		});
 	});
 });

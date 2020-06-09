@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import _ from "lodash";
 import "./GameSetup.css";
 import api from "../../api";
-import { errorMsg } from "../../utils";
+import { errorMsg, redirectTo } from "../../utils";
 import { AppContext } from "../AppContext/AppContext";
 
 const INVALID_GAME_PARAMS_MSG =
@@ -53,21 +53,29 @@ export default function GameSetup() {
     }
   };
 
-  const ListOfSavedGames = () => (
-    <div className="GameSetup-match-list">
-      <>
-        <div className="GameSetup-match-list-title">Saved matches:</div>
-        {matches.slice(0, 10).map((m) => (
-          <a className="GameSetup-match-list-item" href={`/game/${m.id}`}>
-            Match with Id {m.id}
-          </a>
-        ))}
-        {matches.length === 0 && <div>No matches saved yet for user</div>}
-      </>
-    </div>
-  );
+  const ListOfSavedGames = () => {
+    if (_.isEmpty(matches) || !matches.slice)
+      return <div>Loading saved matches...</div>;
+    return (
+      <div className="GameSetup-match-list">
+        <>
+          <div className="GameSetup-match-list-title">Saved matches:</div>
+          {matches.slice(0, 10).map((m, idx) => (
+            <a
+              key={`saved-games-${idx}`}
+              className="GameSetup-match-list-item"
+              href={`/game/${m.id}`}
+            >
+              Match with Id {m.id}
+            </a>
+          ))}
+          {matches.length === 0 && <div>No matches saved yet for user</div>}
+        </>
+      </div>
+    );
+  };
 
-  if (matchId) return <Redirect to={`/game/${matchId}`} />;
+  if (matchId) return redirectTo(`game/${matchId}`);
   return (
     <>
       <div className="GameSetup-container">

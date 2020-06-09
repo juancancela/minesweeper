@@ -19,7 +19,7 @@ export default function AppRoutes() {
           <Route path="/game/:matchId">
             <Game />
           </Route>
-          <Route path="/game">
+          <Route path="/setup">
             <GameSetup />
           </Route>
         </Switch>
