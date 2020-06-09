@@ -1,7 +1,10 @@
-import axios from "axios";
-import { getUserToken, getPlayerId, getMatchId } from "./store";
+const axios = require("axios");
 
-const URL = "http://localhost:3004";
+const USER_TOKEN_KEY = "user-token";
+const PLAYER_ID = "player-id";
+const ls = localStorage;
+
+const URL = "http://192.241.136.96:3001";
 
 const METHOD = {
   POST: "post",
@@ -9,6 +12,18 @@ const METHOD = {
   PUT: "put",
   GET: "get",
 };
+
+export function getUserToken() {
+  return ls.getItem(USER_TOKEN_KEY);
+}
+
+export function getPlayerId() {
+  return ls.getItem(PLAYER_ID);
+}
+
+export function getMatch(id) {
+  return JSON.parse(ls.getItem(`match-${id}`));
+}
 
 const run = async (
   method,
@@ -23,6 +38,11 @@ const run = async (
     throw new Error(error);
   }
 };
+
+export function getMatchId() {
+  const tokenizedUrl = window.location.href.split("/");
+  return tokenizedUrl[tokenizedUrl.length - 1];
+}
 
 const getMatchById = async () => {
   const matchByIdUrl = `player/${getPlayerId()}/match/${getMatchId()}`;

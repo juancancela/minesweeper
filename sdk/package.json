@@ -1,0 +1,11 @@
+{
+  "name": "minesweeper-sdk-jc",
+  "version": "1.0.1",
+  "description": "SDK for the Minesweeper API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Juan Carlos Cancela <cancela.juancarlos@gmail.com>",
+  "license": "ISC"
+}

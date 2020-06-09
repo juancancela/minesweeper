@@ -66,6 +66,21 @@ export const update = async (collectionName: string, obj: Object = {}, id: strin
 	}
 };
 
+export const remove = async (collectionName: string, id: string) => {
+	let connection;
+	try {
+		connection = await client.connect(connectionString);
+		const db = connection.db(databaseName);
+		const col = db.collection(collectionName);
+		const res = await col.deleteOne({ id });
+		return res;
+	} catch (err) {
+		throw new Error(`Connection to MongoDB failed. Error: ${err}`);
+	} finally {
+		if (connection) await connection.close();
+	}
+};
+
 /**
  * Sets the driver of the databse
  * @param cli databse driver client

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import api from "minesweeper-sdk-jc";
 import { errorMsg, redirectTo } from "../../utils";
 import { setUserToken, setPlayerId } from "../../store";
-import api from "../../api";
 import "./Login.css";
 
 const INVALID_USER_AND_PASSWORD_MSG =
