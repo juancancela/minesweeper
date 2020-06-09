@@ -6,6 +6,9 @@ const DEFAULT_NUMBER_OF_ROWS = 10;
 const DEFAULT_NUMBER_OF_COLS = 10;
 const DEFAULT_NUMBER_OF_BOMBS = 10;
 
+const MAX_NUMBER_OF_ROWS = 15;
+const MAX_NUMBER_OF_COLS = 15;
+
 export class Board {
 	private cells: Cell[][] = [];
 	private rows: number;
@@ -17,6 +20,10 @@ export class Board {
 		cols: number = DEFAULT_NUMBER_OF_COLS,
 		bombs: number = DEFAULT_NUMBER_OF_BOMBS
 	) {
+		if (rows > MAX_NUMBER_OF_ROWS || cols > MAX_NUMBER_OF_COLS || rows <= 0 || cols <= 0 || bombs >= rows * cols)
+			throw new Error(
+				`Provided rows(${rows}), cols(${cols}) and bombs(${bombs}) parameters are not valid. All of them should be positive, below 15 and there should be less bombs that available cells.`
+			);
 		this.rows = rows;
 		this.cols = cols;
 		this.bombs = bombs;
