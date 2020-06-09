@@ -10,16 +10,8 @@ const ITEMS = [
     link: "https://github.com/juancancela/minesweeper",
   },
   {
-    name: "API Docs",
-    link: "https://www.google.com",
-  },
-  {
-    name: "SDK Docs",
-    link: "https://www.google.com",
-  },
-  {
-    name: "Code Coverage Report",
-    link: "https://www.google.com",
+    name: "Code Docs",
+    link: "http://192.241.136.96:3002/",
   },
 ];
 
