@@ -5,9 +5,6 @@ import api from "../../api";
 import { errorMsg, redirectTo } from "../../utils";
 import { AppContext } from "../AppContext/AppContext";
 
-const INVALID_GAME_PARAMS_MSG =
-  "Invalid combination of board parameters. Please try with positive integers.";
-
 export default function GameSetup() {
   const [error, setError] = useState(null);
   const [matches, setMatches] = useState([]);
@@ -46,7 +43,7 @@ export default function GameSetup() {
           bombs,
         }));
       } else {
-        setError(INVALID_GAME_PARAMS_MSG);
+        setError(response.message);
       }
     } catch (err) {
       setError(errorMsg(err));
