@@ -42,7 +42,11 @@ export class UpdateCellCommand implements Command<Promise<Match>> {
 			const board = match.board;
 			const cells = board.cells;
 			const cell = cells[this.x][this.y];
-			if (match.state !== MatchStateType.LOST && match.state !== MatchStateType.WON) {
+			if (
+				this.type === CellStateType.UNCOVERED &&
+				match.state !== MatchStateType.LOST &&
+				match.state !== MatchStateType.WON
+			) {
 				if (cell.hasBomb) {
 					match.state = MatchStateType.LOST;
 				} else {
@@ -50,7 +54,9 @@ export class UpdateCellCommand implements Command<Promise<Match>> {
 				}
 			}
 			cell.state = this.type;
-			floodFill(this.x, this.y, cells, true);
+			if (this.type === CellStateType.UNCOVERED) {
+				floodFill(this.x, this.y, cells, true);
+			}
 			MatchService.Cache.put(this.matchId, match);
 			return match;
 		} catch (err) {

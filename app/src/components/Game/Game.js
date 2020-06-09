@@ -4,7 +4,10 @@ import { getPosKeyCodes, fill2DArray, redirectTo } from "../../utils";
 import api from "../../api";
 import { resetStorage } from "../../store";
 import { AppContext } from "../AppContext/AppContext";
+import { Timer } from "../Timer/Timer";
 
+//TODO This function shouldn`t be needed, workaround. Main issue is that
+//cells, both on APP and API would have the same schema.
 export function fromServerCells(serverCells, rows, cols) {
   let cells = [];
   for (let row = 0; row < rows; row++) {
@@ -42,6 +45,7 @@ export default function Game() {
     fill2DArray(COVERED, state.rows, state.cols)
   );
   const [srvCells, setSrvCells] = useState(null);
+  let time = 0;
   const { rows, cols } = state;
 
   useEffect(() => {
@@ -186,16 +190,27 @@ export default function Game() {
           <button className="Login-play-now-btn" onClick={handleRestart}>
             Restart
           </button>
+          <div className="Game-instructions">
+            <div>How to play?</div>
+            <div>Press ←, →, ↓, ↑ to move through the board</div>
+            <div>
+              Press <b>q</b> to flag a cell with a ? mark
+            </div>
+            <div>
+              Press <b>w</b> to flag red a cell
+            </div>
+          </div>
+          <Timer isActive={!matchStatus.isFinished} />
         </div>
         <div className="Game-content-board">
           <>
             <Board />
             {matchStatus.isFinished && (
               <div>
-                Thanks for playing!{" "}
                 {matchStatus.result === MatchState.WON
                   ? "Congratz, you won!"
                   : "Better luck next time!"}
+                Thanks for playing!{" "}
               </div>
             )}
           </>

@@ -47,3 +47,7 @@
 .Item-selected {
   color: chartreuse;
 }
+
+.Game-instructions {
+  padding-top: 30px;
+}

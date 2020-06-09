@@ -93,7 +93,10 @@ export function floodFill(x: number, y: number, map: any, start: boolean = false
 	const isUncovered = map[x][y].state === CellStateType.UNCOVERED;
 	if (!start && isUncovered) return;
 	const noAdjs = map[x][y].adjacentBombs === 0;
-	if (!noAdjs) return;
+	if (!noAdjs) {
+		map[x][y].state = CellStateType.UNCOVERED;
+		return;
+	}
 	map[x][y].state = CellStateType.UNCOVERED;
 
 	floodFill(x + 1, y, map);
