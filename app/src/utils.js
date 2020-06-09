@@ -14,5 +14,9 @@ export function fill2DArray(val, x, y) {
   return new Array(x).fill(val).map(() => new Array(y).fill(val));
 }
 
+export function redirectTo(path) {
+  window.location.href = `${window.location.origin}/${path}`;
+}
+
 export const errorMsg = (msg) =>
   `It looks something is not OK on the API. Please try again later. Details: ${msg}`;

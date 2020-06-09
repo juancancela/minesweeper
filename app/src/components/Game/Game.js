@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import "./Game.css";
-import { getPosKeyCodes, fill2DArray } from "../../utils";
+import { getPosKeyCodes, fill2DArray, redirectTo } from "../../utils";
 import api from "../../api";
 import { resetStorage } from "../../store";
 import { AppContext } from "../AppContext/AppContext";
@@ -24,22 +23,39 @@ export const CellState = {
   FLAGGED_QUESTION: 3,
 };
 
+export const MatchState = {
+  INITIAL: 0,
+  IN_PROGRESS: 1,
+  PAUSED: 2,
+  WON: 3,
+  LOST: 4,
+};
+
 export default function Game() {
+  const { UNCOVERED, COVERED, FLAGGED_RED, FLAGGED_QUESTION } = CellState;
   const [state] = useContext(AppContext);
   const [proceedToHome, setProceedToHome] = useState(false);
   const [proceedToGameSetup, setProceedToGameSetup] = useState(false);
   const [selectedCell, setSelectedCell] = useState({ x: 0, y: 0 });
+  const [matchStatus, setMatchStatus] = useState({ state: "", result: "" });
   const [cells, setCells] = useState(
     fill2DArray(COVERED, state.rows, state.cols)
   );
+  const [srvCells, setSrvCells] = useState(null);
   const { rows, cols } = state;
-  const { UNCOVERED, COVERED, FLAGGED_RED, FLAGGED_QUESTION } = CellState;
 
   useEffect(() => {
     const gameBoard = document.getElementById("game-board");
     if (gameBoard) gameBoard.focus();
     api.getMatchById().then((result) => {
-      const { board } = result.response;
+      const board = result.response.board;
+      if (
+        result.response.state === MatchState.WON ||
+        result.response.state === MatchState.LOST
+      ) {
+        setMatchStatus({ isFinished: true, result: result.response.state });
+      }
+      setSrvCells(board.cells);
       setCells(fromServerCells(board.cells, board.rows, board.cols));
     });
   }, []);
@@ -56,13 +72,24 @@ export default function Game() {
     const { DOWN, UP, RIGHT, LEFT, Q, W, E } = getPosKeyCodes();
     const { x, y } = selectedCell;
     const currentCell = cells[x][y];
-    let updatedCells = cells;
 
     const updateCellState = async (cellState) => {
-      updatedCells[x][y] = cellState;
-      setCells(updatedCells);
+      const response = await api.exec(x, y, cellState);
+      const status = response.response.state;
+      switch (status) {
+        case MatchState.WON:
+          setMatchStatus({ isFinished: true, result: MatchState.WON });
+          await api.saveMatch();
+          break;
+        case MatchState.LOST:
+          setMatchStatus({ isFinished: true, result: MatchState.LOST });
+          await api.saveMatch();
+          break;
+      }
+      const { board } = response.response;
+      setSrvCells(board.cells);
+      setCells(fromServerCells(board.cells, board.rows, board.cols));
       setSelectedCell({ x, y });
-      await api.exec(x, y, cellState);
     };
 
     switch (keyCode) {
@@ -92,15 +119,16 @@ export default function Game() {
   };
 
   function Board() {
-    const board = [];
+    const graphicalBoard = [];
     const { x, y } = selectedCell;
 
     const getStateIcon = (x, y) => {
-      if (!cells) return;
+      if (!cells || !srvCells) return;
       const currentCell = cells[x][y];
       switch (currentCell) {
         case UNCOVERED:
-          return "□";
+          if (srvCells[x][y].hasBomb) return "💣";
+          return srvCells[x][y].adjacentBombs;
         case FLAGGED_QUESTION:
           return "?";
         case FLAGGED_RED:
@@ -112,31 +140,35 @@ export default function Game() {
     };
 
     for (let r = 0; r < rows; r++) {
-      board.push(<div key={`board-row-${r}`}></div>);
+      graphicalBoard.push(
+        <div key={`board-row-${r}`} disabled={matchStatus.isFinished}></div>
+      );
       for (let c = 0; c < cols; c++) {
         const key = `board-c-${c}-r-${r}}`;
         const isSelected = x === r && y === c;
         const cName = `Game-content-board-item ${
           isSelected ? "Item-selected" : ""
         }`;
-        board.push(
+        graphicalBoard.push(
           <span key={key} className={cName}>
             {getStateIcon(r, c)}
           </span>
         );
       }
     }
-    return board;
+    return graphicalBoard;
   }
 
-  if (proceedToHome) return <Redirect to="/" />;
-  if (proceedToGameSetup) return <Redirect to="/game" />;
+  if (proceedToHome) return redirectTo("");
+  if (proceedToGameSetup) return redirectTo("setup");
 
   return (
     <div
       className="Game-container"
       tabIndex="0"
-      onKeyDown={async (e) => await handlePosition(e)}
+      onKeyDown={async (e) =>
+        !matchStatus.isFinished && (await handlePosition(e))
+      }
       id="game-board"
     >
       <div className="Game-bar">
@@ -156,7 +188,17 @@ export default function Game() {
           </button>
         </div>
         <div className="Game-content-board">
-          <Board />
+          <>
+            <Board />
+            {matchStatus.isFinished && (
+              <div>
+                Thanks for playing!{" "}
+                {matchStatus.result === MatchState.WON
+                  ? "Congratz, you won!"
+                  : "Better luck next time!"}
+              </div>
+            )}
+          </>
         </div>
       </div>
     </div>

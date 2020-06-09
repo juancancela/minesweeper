@@ -1,5 +1,5 @@
 import { Cell } from './Cell';
-import { randomMatrix } from '../common/utils/data';
+import { randomMatrix, calculateAdjCoeficient } from '../common/utils/data';
 import { CellStateType } from './CellStateType';
 
 const DEFAULT_NUMBER_OF_ROWS = 10;
@@ -30,7 +30,9 @@ export class Board {
 			for (let y = 0; y < cols; y++) {
 				if (!cells[x]) cells[x] = [];
 				const hasBomb = bombsMatrix[x][y];
+				const adj = calculateAdjCoeficient(x, y, bombsMatrix, cols, rows);
 				cells[x][y] = new Cell(CellStateType.COVERED, hasBomb);
+				cells[x][y].setAdjacentBombs(adj);
 			}
 		}
 		return cells;
@@ -57,11 +59,7 @@ export class Board {
 	}
 
 	getCellAdjacentBombs(x: number, y: number): number {
-		return 4;
-	}
-
-	getCellAdjacentBombsMatrix(): number[][] {
-		return [[1]];
+		return this.cells[x][y].getAdjacentBombs();
 	}
 
 	uncover(x: number, y: number): void {

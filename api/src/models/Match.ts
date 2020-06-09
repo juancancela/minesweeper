@@ -17,6 +17,10 @@ export class Match extends Entity {
 		return this.state;
 	}
 
+	setState(updatedState: MatchStateType): void {
+		this.state = updatedState;
+	}
+
 	getBoard(): Board {
 		return this.board;
 	}

@@ -30,9 +30,7 @@ const getMatchById = async () => {
 };
 
 const getMatchesOfPlayer = async () => {
-  console.log("lala");
   const matchesOfPlayerUrl = `player/${getPlayerId()}/match`;
-  console.log(matchesOfPlayerUrl);
   return await run(METHOD.GET, matchesOfPlayerUrl);
 };
 

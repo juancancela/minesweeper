@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { errorMsg } from "../../utils";
+import { errorMsg, redirectTo } from "../../utils";
 import { setUserToken, setPlayerId } from "../../store";
 import api from "../../api";
 import "./Login.css";
-import { Redirect } from "react-router-dom";
 
 const INVALID_USER_AND_PASSWORD_MSG =
   "Invalid User and Password. (Hint: Have you tried with juan@dev.com / 123 ? ;)";
@@ -14,7 +13,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [proceedToGameSetup, setProceedToGameSetup] = useState(false);
 
-  if (proceedToGameSetup) return <Redirect to="/game" />;
+  if (proceedToGameSetup) return redirectTo("setup");
   const handleLogin = async () => {
     try {
       const { response } = await api.login(email, password);
