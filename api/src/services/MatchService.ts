@@ -1,5 +1,5 @@
 import { Match } from '../models/Match';
-import { create, read, update } from '../common/utils/db';
+import { create, read, update, remove } from '../common/utils/db';
 import { Command } from '../common/Command';
 import { Board } from '../models/Board';
 import { LruCache } from '../common/Cache';
@@ -27,15 +27,14 @@ export class MatchService {
 	 * @param matchId id of the match to be deleted
 	 */
 	async deleteMatch(matchId: string): Promise<void> {
-		return;
+		return await remove('matches', matchId);
 	}
 
 	/**
 	 * Gets the list of all matches
 	 */
 	async getMatches(): Promise<Match[]> {
-		const board = new Board();
-		return [new Match('2', board)];
+		return await read('matches', {}, true);
 	}
 
 	/**

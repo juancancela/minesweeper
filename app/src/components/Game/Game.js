@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
+import api from "minesweeper-sdk-jc";
 import "./Game.css";
 import { getPosKeyCodes, fill2DArray, redirectTo } from "../../utils";
-import api from "../../api";
 import { resetStorage } from "../../store";
 import { AppContext } from "../AppContext/AppContext";
 import { Timer } from "../Timer/Timer";
@@ -45,12 +45,12 @@ export default function Game() {
     fill2DArray(COVERED, state.rows, state.cols)
   );
   const [srvCells, setSrvCells] = useState(null);
-  let time = 0;
   const { rows, cols } = state;
 
   useEffect(() => {
     const gameBoard = document.getElementById("game-board");
     if (gameBoard) gameBoard.focus();
+    console.log(JSON.stringify(api));
     api.getMatchById().then((result) => {
       const board = result.response.board;
       if (
@@ -194,10 +194,13 @@ export default function Game() {
             <div>How to play?</div>
             <div>Press ←, →, ↓, ↑ to move through the board</div>
             <div>
-              Press <b>q</b> to flag a cell with a ? mark
+              Press <b>q</b> to uncover a cell
             </div>
             <div>
-              Press <b>w</b> to flag red a cell
+              Press <b>w</b> to flag a cell with a ? mark
+            </div>
+            <div>
+              Press <b>e</b> to flag red a cell
             </div>
           </div>
           <Timer isActive={!matchStatus.isFinished} />

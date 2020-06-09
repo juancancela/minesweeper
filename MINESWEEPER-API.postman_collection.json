@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "959c5eef-db3a-470f-b400-a7133c4d23f9",
+		"name": "MINESWEEPER-API",
+		"description": "MineSweeper API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET list of matches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.241.136.96:3001/match",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"match"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET match by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.241.136.96:3001/player/player-1/match/player1-1591732762267",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"player",
+						"player-1",
+						"match",
+						"player1-1591732762267"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET match by Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3004/player/player",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3004",
+							"path": [
+								"player",
+								"player"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "89"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"59-rWZbW+bwwPKseimzZUpOo6GQdAg\""
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 09 Jun 2020 20:06:12 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"response\": {\n        \"id\": \"\",\n        \"name\": \"Juan Carlos Cancela\",\n        \"email\": \"juan@dev.com\"\n    },\n    \"success\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "GET player by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.241.136.96:3001/player/player",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"player",
+						"player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SAVE match by Id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://192.241.136.96:3001/player/player-1/match/player1-1591732762267",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"player",
+						"player-1",
+						"match",
+						"player1-1591732762267"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST command to match",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"x\": 1,\n\t\"y\": 0,\n\t\"name\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.241.136.96:3001/player/player-1/match/player-1591734338090/command",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"player",
+						"player-1",
+						"match",
+						"player-1591734338090",
+						"command"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE match by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://192.241.136.96:3001/player/player-1/match/player-1591734338090",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"player",
+						"player-1",
+						"match",
+						"player-1591734338090"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"juan@dev.com\",\n\t\"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.241.136.96:3001/auth/login",
+					"protocol": "http",
+					"host": [
+						"192",
+						"241",
+						"136",
+						"96"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "123ewqSDSADWW212123hgfhyu67GDGFd",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "user-token",
+				"type": "string"
+			}
+		]
+	},
+	"protocolProfileBehavior": {}
+}

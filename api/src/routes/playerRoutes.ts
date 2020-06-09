@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/:id', async (req: Request, res: Response) => {
 	try {
 		const id = String(req.params?.id);
-		return res.send(responseOk(playerService.getPlayer(id)));
+		return res.send(responseOk(await playerService.getPlayer(id)));
 	} catch (err) {
 		return res.send(responseError(err.message));
 	}
@@ -92,8 +92,8 @@ router.post('/:playerId/match/:matchId/command', async (req: Request, res: Respo
 router.delete('/:playerId/match/:matchId', async (req: Request, res: Response) => {
 	try {
 		const matchId = String(req.params?.matchId);
-		const result = matchService.deleteMatch(matchId);
-		return res.send(responseOk(result));
+		await matchService.deleteMatch(matchId);
+		return res.send(responseOk('ok'));
 	} catch (err) {
 		return res.send(responseError(err.message));
 	}

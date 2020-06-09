@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import _ from "lodash";
+import api from "minesweeper-sdk-jc";
 import "./GameSetup.css";
-import api from "../../api";
 import { errorMsg, redirectTo } from "../../utils";
 import { AppContext } from "../AppContext/AppContext";
 
