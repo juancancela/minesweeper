@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Implementation of [Minesweeper game](<https://en.wikipedia.org/wiki/Minesweeper_(video_game)>).
-Try it out [here](https://www.google.com).
+Try it out [here](http://192.241.136.96:3000/).
 
 [1. Overview](#overview)
 
