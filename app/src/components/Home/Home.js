@@ -30,7 +30,7 @@ export default function Home() {
       <header className="Home-header">
         <img src={logo} className="Home-logo" alt="logo" />
         <h1>Minesweeper Project</h1>
-        <Link className="Home-play-now-btn" to={token ? "/game" : "/login"}>
+        <Link className="Home-play-now-btn" to={token ? "/setup" : "/login"}>
           {token ? "Create Match" : "Sign In"}
         </Link>
         <div></div>
