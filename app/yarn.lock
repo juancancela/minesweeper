@@ -4831,9 +4831,9 @@ fb-watchman@^2.0.0:
     bser "2.1.1"
 
 figgy-pudding@^3.5.1:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.1.tgz#862470112901c727a0e495a80744bd5baa1d6790"
-  integrity sha512-vNKxJHTEKNThjfrdJwHc7brvM6eVevuO5nTj6ez8ZQ1qbXTvGthucRF7S4vf2cr71QVnT70V34v0S1DyQsti0w==
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
+  integrity sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw==
 
 figures@^3.0.0:
   version "3.1.0"
@@ -7153,10 +7153,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minesweeper-sdk-jc@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.0.tgz#64010230c7e53ff9b06641865ced622edfa50929"
-  integrity sha512-c/bEJ90cC5hRYLlULAA47LSFj1jxOOyrgzTwOZaKfEe5PQy58E6Qm9zhQmCJw7nyAAPzXmIEnVenbbmzP2zRzw==
+minesweeper-sdk-jc@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.1.tgz#5993a892ef1924d35fee93730c904dbb9df7ce09"
+  integrity sha512-K/bmtN7QD2KLe/e/LcgK2OkWBy9cmslV5D4F+Ev47WsRC0UQkOCR9bCevyCTUDP7JE4bCxmrkEk109UDUSYtKg==
 
 mini-create-react-context@^0.4.0:
   version "0.4.0"
@@ -10113,9 +10113,9 @@ sshpk@^1.7.0:
     tweetnacl "~0.14.0"
 
 ssri@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.1.tgz#2a3c41b28dd45b62b63676ecb74001265ae9edd8"
-  integrity sha512-3Wge10hNcT1Kur4PDFwEieXSCMCJs/7WvSACcrMYrNp+b8kDL1/0wJch5Ni2WrtwEa2IO8OsVfeKIciKCDx/QA==
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/ssri/-/ssri-6.0.2.tgz#157939134f20464e7301ddba3e90ffa8f7728ac5"
+  integrity sha512-cepbSq/neFK7xB6A50KHN0xHDotYzq58wWCa5LeWqnPrHG8GzfEjO/4O8kpmcGW+oaxkvhEJCWgbgNk4/ZV93Q==
   dependencies:
     figgy-pudding "^3.5.1"
 
