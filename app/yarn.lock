@@ -7061,9 +7061,9 @@ memory-fs@^0.5.0:
     readable-stream "^2.0.1"
 
 merge-deep@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/merge-deep/-/merge-deep-3.0.2.tgz#f39fa100a4f1bd34ff29f7d2bf4508fbb8d83ad2"
-  integrity sha512-T7qC8kg4Zoti1cFd8Cr0M+qaZfOwjlPDEdZIIPPB2JZctjaPM4fX+i7HOId69tAti2fvO6X5ldfYUONDODsrkA==
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/merge-deep/-/merge-deep-3.0.3.tgz#1a2b2ae926da8b2ae93a0ac15d90cd1922766003"
+  integrity sha512-qtmzAS6t6grwEkNrunqTBdn0qKwFgNWvlxUbAV8es9M7Ot1EbyApytCnvE0jALPa46ZpKDUo527kKiaWplmlFA==
   dependencies:
     arr-union "^3.1.0"
     clone-deep "^0.2.4"
@@ -7153,10 +7153,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minesweeper-sdk-jc@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.0.tgz#64010230c7e53ff9b06641865ced622edfa50929"
-  integrity sha512-c/bEJ90cC5hRYLlULAA47LSFj1jxOOyrgzTwOZaKfEe5PQy58E6Qm9zhQmCJw7nyAAPzXmIEnVenbbmzP2zRzw==
+minesweeper-sdk-jc@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.1.tgz#5993a892ef1924d35fee93730c904dbb9df7ce09"
+  integrity sha512-K/bmtN7QD2KLe/e/LcgK2OkWBy9cmslV5D4F+Ev47WsRC0UQkOCR9bCevyCTUDP7JE4bCxmrkEk109UDUSYtKg==
 
 mini-create-react-context@^0.4.0:
   version "0.4.0"
