@@ -7153,10 +7153,10 @@ min-indent@^1.0.0:
   resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.1.tgz#a63f681673b30571fbe8bc25686ae746eefa9869"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
 
-minesweeper-sdk-jc@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.0.tgz#64010230c7e53ff9b06641865ced622edfa50929"
-  integrity sha512-c/bEJ90cC5hRYLlULAA47LSFj1jxOOyrgzTwOZaKfEe5PQy58E6Qm9zhQmCJw7nyAAPzXmIEnVenbbmzP2zRzw==
+minesweeper-sdk-jc@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/minesweeper-sdk-jc/-/minesweeper-sdk-jc-1.0.1.tgz#5993a892ef1924d35fee93730c904dbb9df7ce09"
+  integrity sha512-K/bmtN7QD2KLe/e/LcgK2OkWBy9cmslV5D4F+Ev47WsRC0UQkOCR9bCevyCTUDP7JE4bCxmrkEk109UDUSYtKg==
 
 mini-create-react-context@^0.4.0:
   version "0.4.0"
@@ -7941,9 +7941,9 @@ path-key@^3.1.0:
   integrity sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 path-to-regexp@0.1.7:
   version "0.1.7"
